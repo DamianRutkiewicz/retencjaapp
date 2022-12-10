@@ -1,6 +1,6 @@
-# Quasar App (retencja-app)
+# Retencja.pl
 
-A Quasar Project
+A project displaying a list of users and user cards.
 
 ## Install the dependencies
 
