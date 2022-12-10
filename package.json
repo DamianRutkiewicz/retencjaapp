@@ -1,7 +1,7 @@
 {
   "name": "retencja-app",
   "version": "0.0.1",
-  "description": "A Quasar Project",
+  "description": "A Quasar Project for retencja.pl",
   "productName": "Quasar App",
   "author": "DamianRutkiewicz <damian.rutkiewicz@interia.pl>",
   "private": true,
