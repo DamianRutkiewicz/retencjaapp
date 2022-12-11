@@ -8,8 +8,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "quasar dev",
-    "build": "npx quasar build",
-    "heroku-postbuild": "npm install && npm install -g @quasar/cli && npm run build",
+    "build": "quasar build",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore"
   },
