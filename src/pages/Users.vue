@@ -49,15 +49,15 @@
 </template>
 
 <script lang="ts">
-import { User } from 'src/types/user';
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { TABLE_COLUMNS } from 'src/utils/constant';
-import { QTableProps } from 'quasar';
+import { User } from "src/types/user";
+import { defineComponent } from "vue";
+import axios from "axios";
+import { TABLE_COLUMNS } from "src/utils/constant";
+import { QTableProps } from "quasar";
 import {
   getFavoriteUsersLStorage,
   setIsFavoriteToLStorage,
-} from 'src/utils/common';
+} from "src/utils/common";
 
 type Pagination = {
   rowsPerPage: number;
@@ -65,7 +65,7 @@ type Pagination = {
 
 type Data = {
   users: User[];
-  columns: QTableProps['columns'];
+  columns: QTableProps["columns"];
   tableLoading: boolean;
   activePage: number;
   totalPages: number;
@@ -76,7 +76,7 @@ type Data = {
 };
 
 export default defineComponent({
-  name: 'UsersPage',
+  name: "UsersPage",
 
   data(): Data {
     return {
@@ -88,7 +88,7 @@ export default defineComponent({
       pagination: {
         rowsPerPage: 10,
       },
-      searchPhrase: '',
+      searchPhrase: "",
       favoriteUsersIds: [],
       rowsPerPageOptions: [5, 10, 20, 50],
     };
@@ -104,7 +104,7 @@ export default defineComponent({
       this.fetchUsers();
     },
 
-    'pagination.rowsPerPage'() {
+    "pagination.rowsPerPage"() {
       this.fetchUsers();
     },
   },
@@ -114,23 +114,24 @@ export default defineComponent({
       if (!this.searchPhrase) return this.users;
       return this.users.filter(({ id, first_name, last_name }) =>
         Object.values({ id, first_name, last_name })
+          .map(v => String(v).toLowerCase())
           .join()
-          .includes(this.searchPhrase)
+          .includes(this.searchPhrase.toLowerCase())
       );
     },
   },
 
   methods: {
     rowClick(event: Event, user: User) {
-      this.$router.push({ name: 'user', params: { id: user.id } });
+      this.$router.push({ name: "user", params: { id: user.id } });
     },
 
     async fetchUsers() {
       this.tableLoading = true;
       try {
         const response = await axios({
-          url: 'https://reqres.in/api/users',
-          method: 'get',
+          url: "https://reqres.in/api/users",
+          method: "get",
           params: {
             page: this.activePage,
             per_page: this.pagination.rowsPerPage,
@@ -151,7 +152,7 @@ export default defineComponent({
 
     toggleIsFavorite(user: User) {
       const list = this.favoriteUsersIds.includes(user.id)
-        ? this.favoriteUsersIds.filter((id) => id !== user.id)
+        ? this.favoriteUsersIds.filter(id => id !== user.id)
         : [...this.favoriteUsersIds, user.id];
 
       setIsFavoriteToLStorage(list);
